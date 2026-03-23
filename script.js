@@ -33,5 +33,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // ── Interacción de Videos ──────────────────────
+    const videos = document.querySelectorAll('.media-video');
+    videos.forEach(video => {
+        video.addEventListener('click', () => {
+            if (video.paused) {
+                video.play();
+            } else {
+                video.pause();
+            }
+        });
+    });
+
 });
 
