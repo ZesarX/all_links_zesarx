@@ -19,18 +19,32 @@
 }
 
 [data-theme="light"] {
-  --bg: #f5f5f5;
-  --bg2: #ffffff;
-  --bg3: #ebebeb;
-  --green: #00aa55;
-  --green-dim: #008844;
-  --green-muted: #4caf80;
-  --text: #0a0a0a;
-  --text-sub: #555;
-  --border: #ddd;
-  --matrix: transparent;
-  --featured-bg: #00aa55;
+  --bg: #e2e8f0; /* Slightly cooler grey base */
+  --bg2: rgba(255, 255, 255, 0.45);
+  --bg3: rgba(255, 255, 255, 0.2);
+  --green: #94a3b8; /* Ghost Grey / Slate */
+  --green-dim: #64748b;
+  --green-muted: #cbd5e1;
+  --text: #1e293b;
+  --text-sub: #475569;
+  --border: rgba(255, 255, 255, 0.4);
+  --matrix: rgba(0, 0, 0, 0.03);
+  --featured-bg: #475569; /* Ghostly dark grey */
   --featured-txt: #fff;
+}
+
+[data-theme="light"] body {
+  background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 50%, #bcccdc 100%);
+  background-attachment: fixed;
+}
+
+[data-theme="light"] .hero-img-wrap {
+  background: radial-gradient(circle at center, rgba(148, 163, 184, 0.15) 0%, #e2e8f0 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="light"] .hero-img {
+  filter: drop-shadow(0 0 25px rgba(100, 116, 139, 0.2));
 }
 
 /* ═══════════════════════════════════════════════════
@@ -193,6 +207,8 @@ body {
   color: var(--green);
   text-decoration: none;
   transition: all .25s;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .social-icon svg {
@@ -244,6 +260,8 @@ body {
   transition: border-color .2s;
   position: relative;
   z-index: 1;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .followers-bar:hover {
@@ -331,6 +349,8 @@ body {
   font-weight: 500;
   font-size: .95rem;
   transition: border-color .25s, transform .25s, box-shadow .25s;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .link-simple:hover {
@@ -367,6 +387,10 @@ body {
   border: 1px solid var(--border);
   margin-bottom: .9rem;
   transition: transform .3s, box-shadow .3s;
+  /* Glassmorphism base */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: var(--bg2);
 }
 
 .link-card-img:hover {
@@ -562,6 +586,8 @@ footer {
   padding: 1rem;
   margin-bottom: .8rem;
   transition: border-color .25s;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .shout-card:hover {
