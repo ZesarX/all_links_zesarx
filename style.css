@@ -5,15 +5,18 @@
   --bg: #060f06;
   --bg2: #0b1a0b;
   --bg3: #0f220f;
-  --green: #00ff88;
-  --green-dim: #00cc6a;
-  --green-muted: #2a8a50;
+--cyan: #00ffff;
+  --cyan-dim: #00d4d4;
+  --cyan-muted: #1a9a9a;
+  --green: #00ffff; /* Alias for compatibility */
+  --green-dim: #00d4d4;
+  --green-muted: #1a9a9a;
   --text: #e0ffe8;
   --text-sub: #5db87a;
   --border: #0e3d1a;
   --card-h: 210px;
   --grid-h: 160px;
-  --matrix: rgba(0, 255, 136, 0.04);
+--matrix: rgba(0, 255, 136, 0.12);
   --featured-bg: #00ff88;
   --featured-txt: #000;
 }
@@ -22,13 +25,16 @@
   --bg: #e2e8f0; /* Slightly cooler grey base */
   --bg2: rgba(255, 255, 255, 0.45);
   --bg3: rgba(255, 255, 255, 0.2);
-  --green: #94a3b8; /* Ghost Grey / Slate */
-  --green-dim: #64748b;
-  --green-muted: #cbd5e1;
+--cyan: #60a5fa; /* Neon blue light */
+  --cyan-dim: #3b82f6;
+  --cyan-muted: #93c5fd;
+  --green: #60a5fa; /* Alias */
+  --green-dim: #3b82f6;
+  --green-muted: #93c5fd;
   --text: #1e293b;
   --text-sub: #475569;
   --border: rgba(255, 255, 255, 0.4);
-  --matrix: rgba(0, 0, 0, 0.03);
+--matrix: rgba(0, 0, 0, 0.08);
   --featured-bg: #475569; /* Ghostly dark grey */
   --featured-txt: #fff;
 }
@@ -63,12 +69,37 @@ body {
   background: var(--bg);
   color: var(--text);
   line-height: 1.5;
-  transition: background .3s, color .3s;
+  transition: color .3s;
   overflow-x: hidden;
-  background-image:
-    repeating-linear-gradient(0deg, var(--matrix) 0, var(--matrix) 1px, transparent 1px, transparent 36px),
-    repeating-linear-gradient(90deg, var(--matrix) 0, var(--matrix) 1px, transparent 1px, transparent 36px);
+  position: relative;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
 }
+
+#bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  mix-blend-mode: overlay;
+}
+
+#bg-video::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(6,15,30,0.4) 0%, rgba(0,0,20,0.7) 50%, rgba(10,20,40,0.9) 100%);
+  z-index: -1;
+}
+
+/* Matrix animation removed - video bg active */
 
 /* ═══════════════════════════════════════════════════
    LAYOUT
@@ -82,19 +113,28 @@ body {
 /* ─── BOTÓN TEMA ──────────────────────── */
 .theme-toggle {
   position: fixed;
-  top: 1rem;
-  right: 1rem;
-  background: rgba(0, 255, 136, .1);
+  bottom: 1rem;
+  left: 1rem;
+background: rgba(0, 255, 255, .15);
   backdrop-filter: blur(10px);
   border: 1px solid var(--border);
   border-radius: 50%;
   width: 44px;
   height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 1.1rem;
   cursor: pointer;
   color: var(--text);
   transition: all .3s;
   z-index: 1000;
+}
+
+.theme-toggle .theme-icon {
+  display: block;
+  width: 20px;
+  height: 20px;
 }
 
 .theme-toggle:hover {
@@ -122,7 +162,7 @@ body {
   height: 350px; /* Altura de la imagen principal */
   overflow: hidden;
   border-bottom: 2px solid var(--border);
-  background: radial-gradient(circle at center, rgba(0, 255, 136, 0.2) 0%, #060f06 80%);
+background: radial-gradient(circle at center, rgba(0, 255, 255, 0.25) 0%, #060f06 80%);
 }
 
 .hero-img {
@@ -160,6 +200,18 @@ body {
   color: rgba(255,255,255,0.8);
   font-size: 1rem;
   text-shadow: 0 1px 5px rgba(0,0,0,0.5);
+}
+
+.hero-name-overlay .bio {
+  color: rgba(255,255,255,0.85);
+  font-size: 0.85rem;
+  text-shadow: 0 1px 5px rgba(0,0,0,0.5);
+  margin-top: 0.4rem;
+  font-weight: 400;
+  line-height: 1.4;
+  max-width: 280px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .verified {
@@ -368,8 +420,14 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
   flex-shrink: 0;
+}
+
+.ls-logo .platform-icon {
+  width: 22px;
+  height: 22px;
+  color: var(--green);
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.3));
 }
 
 .ls-text {
@@ -418,7 +476,8 @@ body {
 
 /* Imagen real (cuando la vayas a poner):
    <img src="foto.jpg" class="card-real-img"> */
-.card-real-img {
+.card-real-img,
+.card-real-video {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -443,6 +502,7 @@ body {
   font-weight: 700;
   font-size: 1rem;
   text-shadow: 0 1px 4px rgba(0, 0, 0, .7);
+  z-index: 2;
 }
 
 .card-icon-sm {
