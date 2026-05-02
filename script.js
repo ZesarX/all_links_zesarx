@@ -87,5 +87,25 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.target === lightbox) closeLightbox();
     });
 
+    // ── Ocultar Preloader ──────────────────────────
+    window.addEventListener('load', function() {
+        const preloader = document.getElementById('preloader');
+        const percentageText = document.getElementById('loader-percentage');
+        let count = 0;
+        
+        // Animación del porcentaje
+        const interval = setInterval(() => {
+            count++;
+            percentageText.innerText = count + '%';
+            if (count >= 100) {
+                clearInterval(interval);
+                // Un pequeño delay después de llegar a 100%
+                setTimeout(() => {
+                    preloader.classList.add('loaded');
+                }, 500);
+            }
+        }, 20); // Ajusta la velocidad aquí
+    });
+
 });
 
