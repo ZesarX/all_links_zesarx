@@ -554,9 +554,9 @@ background: rgba(0, 255, 255, .15);
 }
 
 .link-grid-item:hover {
-  border-color: var(--green);
+  border-color: var(--brand-color, var(--green));
   transform: translateY(-3px);
-  box-shadow: 0 0 18px rgba(0, 255, 136, .2);
+  box-shadow: 0 0 18px var(--brand-color, rgba(0, 255, 136, .2));
 }
 
 .grid-img-placeholder {
@@ -574,14 +574,14 @@ background: rgba(0, 255, 255, .15);
 .grid-img-placeholder svg {
   width: 42px;
   height: 42px;
-  color: var(--green);
-  filter: drop-shadow(0 0 8px rgba(0, 255, 136, 0.5));
+  color: var(--brand-color, var(--green));
+  filter: drop-shadow(0 0 8px var(--brand-color, rgba(0, 255, 136, 0.5)));
   transition: all 0.3s ease;
 }
 
 .link-grid-item:hover .grid-img-placeholder svg {
   transform: scale(1.15);
-  filter: drop-shadow(0 0 15px var(--green));
+  filter: drop-shadow(0 0 15px var(--brand-color, var(--green)));
 }
 
 /* Imagen real para grid:
